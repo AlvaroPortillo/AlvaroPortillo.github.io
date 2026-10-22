@@ -76,7 +76,7 @@ main:focus { outline: none; }
   position: relative; isolation: isolate;
   max-width: var(--max); margin: 0 auto;
   padding: 112px var(--gutter) 72px;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
   align-items: center; gap: 48px;
 }
 .hero-copy { display: grid; gap: 20px; justify-items: start; }
@@ -103,7 +103,7 @@ main:focus { outline: none; }
 .link-plain svg { width: 18px; height: 18px; fill: currentColor; }
 .link-plain:hover { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: var(--surface-2); }
 
-.hero-emblem { grid-column: 2; grid-row: 1; aspect-ratio: 344 / 304; width: 100%; }
+.hero-emblem { grid-column: 2; grid-row: 1; aspect-ratio: 1; width: 100%; }
 
 .theme {
   position: absolute; top: 20px; right: var(--gutter);
@@ -180,7 +180,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) 96px; }
 /* ---------- móvil y tableta ---------- */
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; padding-top: 72px; padding-bottom: 48px; gap: 28px; }
-  .hero-emblem { grid-column: auto; grid-row: auto; width: min(340px, 88vw); }
+  .hero-emblem { grid-column: auto; grid-row: auto; width: min(280px, 76vw); }
   .project { grid-template-columns: 1fr; gap: 24px; margin-top: 56px; }
 }
 

@@ -7,8 +7,9 @@ sienta de la misma casa, pero sin los logos de la guía.
 ## Idea central
 El **emblema Kingdom Hearts + World of Warcraft + Naruto** es el elemento memorable (`notas/logo.py`
 genera `img/logo.svg`, `img/logo-animado.svg` y el de la cabecera). De atrás adelante:
-- Alas de dragón doradas con bisel (filigrana de los marcos de la interfaz de WoW).
-- Espada rúnica de WoW con runas que brillan y llave espada de KH, cruzadas detrás del anillo.
+- Cruzadas detrás del anillo, con punta y guarda asomando: Frostmourne, la espada de Arthas (hoja
+  dentada con runas que laten en la canaladura, calavera de ojos azules con cuernos, pomo con pinchos)
+  y la Cadena Reino de KH (dientes en corona, guarda dorada en cesta, llavero con la cabeza de Mickey).
 - Puntas biseladas, anillo de metal dorado con remaches y cimera con gema roja (WoW).
 - Banda de piedra con runas arcanas que laten (la piedra de hogar). Glifos inventados.
 - Vidriera de la Estación del Despertar (KH) con el azul de la Alianza y el rojo de la Horda.

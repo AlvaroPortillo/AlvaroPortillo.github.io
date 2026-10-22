@@ -5,8 +5,8 @@
 - index.html            mete el animado entre <!-- logo:inicio --> y <!-- logo:fin -->
 
 Capas, de atrás adelante:
-- WoW: alas de dragón doradas (filigrana de los marcos de la interfaz) y una espada rúnica.
-- KH: una llave espada, cruzada con la espada detrás del anillo.
+- Colgando del anillo, abiertas en V: la llave espada (KH) y la espada de Arthas al estilo Frostmourne
+  (WoW): hoja dentada con runas, guarda con cuernos y calavera de ojos azules.
 - WoW: anillo de metal con remaches, cimera con gema y banda de piedra con runas arcanas (la piedra
   de hogar). Las runas son glifos inventados: no copian ningún alfabeto ni logotipo.
 - KH + WoW: vidriera de la Estación del Despertar con los colores de la Alianza y la Horda.
@@ -56,45 +56,62 @@ def sector(r1, r2, a0, a1):
             f'L{f(x3)} {f(y3)}A{r1} {r1} 0 0 0 {f(x0)} {f(y0)}Z')
 
 
-def ala(g):
-    """Ala izquierda de dragón (la derecha es su espejo): membrana con tres festones y huesos."""
-    membrana = ('M-84 -34C-104 -62-134 -78-164 -74Q-146 -54-160 -28Q-138 -20-144 14'
-                'Q-122 12-114 48Q-98 30-86 30Z')
-    return (f'<path d="{membrana}" fill="url(#{g("oro")})" stroke="{PLOMO}" stroke-width="2.4" stroke-linejoin="round"/>'
-            f'<path d="M-86 -24-160 -28M-86 -4-144 14M-86 16-114 48M-84 -34-164 -74" fill="none" '
-            f'stroke="{ORO_OSCURO}" stroke-width="2.2" stroke-linecap="round"/>'
-            f'<path d="M-90 -36C-108 -60-134 -72-158 -71" fill="none" stroke="{ORO_CLARO}" stroke-width="1.6" stroke-linecap="round"/>')
-
-
 def llave_espada(g):
-    """Llave espada en vertical (punta arriba); se gira 45° al colocarla. La punta asoma por encima del
-    anillo y la empuñadura por debajo."""
+    """Cadena Reino en vertical (punta arriba). Origen en el centro del emblema: la punta y los dientes
+    asoman por encima del anillo y la guarda en cesta, el puño y el llavero por debajo."""
     return (
-        f'<rect x="-4" y="-142" width="8" height="244" rx="2" fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="2"/>'
-        # Dientes de la llave: silueta de corona
-        f'<path d="M3 -146H22V-132H16V-138H10V-125H3Z" fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="2" stroke-linejoin="round"/>'
-        # Guarda redondeada dorada y empuñadura
-        f'<rect x="-4.5" y="102" width="9" height="28" rx="2" fill="#2A2F45" stroke="{PLOMO}" stroke-width="1.6"/>'
-        f'<rect x="-14" y="99" width="28" height="34" rx="10" fill="none" stroke="{PLOMO}" stroke-width="8.5"/>'
-        f'<rect x="-14" y="99" width="28" height="34" rx="10" fill="none" stroke="url(#{g("oro")})" stroke-width="5.5"/>'
-        # Llavero
-        f'<path d="M0 133V140" stroke="{PLOMO}" stroke-width="1.6"/>'
-        f'<path transform="translate(0 147) scale(.28)" d="{HEART}" fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="5"/>')
+        # Varilla plateada con remate redondo en la punta
+        f'<rect x="-5.5" y="-156" width="11" height="262" rx="5.5" fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="2.4"/>'
+        # Dientes: corona de tres puntas mirando hacia fuera
+        f'<path d="M5 -160H20L34 -168 28 -152 40 -144 28 -136 34 -120 20 -128H5Z" '
+        f'fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="2.4" stroke-linejoin="round"/>'
+        # Puño negro y guarda dorada en cesta, que envuelve la mano
+        f'<rect x="-5" y="108" width="10" height="30" rx="3" fill="#1C2033" stroke="{PLOMO}" stroke-width="1.8"/>'
+        f'<path d="M-6 104C-24 104-26 112-26 122-26 134-20 142-8 142H8C20 142 26 134 26 122 26 112 24 104 6 104" '
+        f'fill="none" stroke="{PLOMO}" stroke-width="10" stroke-linecap="round"/>'
+        f'<path d="M-6 104C-24 104-26 112-26 122-26 134-20 142-8 142H8C20 142 26 134 26 122 26 112 24 104 6 104" '
+        f'fill="none" stroke="url(#{g("oro")})" stroke-width="6.5" stroke-linecap="round"/>'
+        f'<rect x="-9" y="99" width="18" height="8" rx="3" fill="url(#{g("oro")})" stroke="{PLOMO}" stroke-width="2"/>'
+        # Llavero con cabeza de Mickey (tres círculos)
+        f'<path d="M0 142V154" stroke="#C9D3E6" stroke-width="2" stroke-dasharray="2.5 1.5"/>'
+        f'<g fill="url(#{g("plata")})" stroke="{PLOMO}" stroke-width="1.8">'
+        f'<circle cy="162" r="6.5"/><circle cx="-6.5" cy="155" r="4"/><circle cx="6.5" cy="155" r="4"/></g>')
 
 
-def espada_runica(g):
-    """Espada rúnica de WoW en vertical (punta arriba), con runas que brillan en la parte de la hoja que
-    asoma por encima del anillo."""
-    runas = ''.join(f'<path class="e-runa" style="--i:{i}" transform="translate(0 {y}) scale(.7)" d="{RUNAS[i]}"/>'
-                    for i, y in enumerate([-128, -110]))
+def espada_arthas(g):
+    """Frostmourne en vertical (punta arriba). Origen en el centro del emblema: la punta asoma por
+    encima del anillo y la guarda (calavera con cuernos), el puño y el pomo por debajo."""
+    # Hoja ancha con el filo dentado en sierra: se estrecha hacia la punta
+    derecha = []
+    for y in range(-142, 96, 20):
+        w = 7 + (y + 160) / 256 * 10
+        derecha += [(w + 3, y), (w - 2, y + 8)]
+    pts = [(0, -170)] + derecha + [(15, 100)]
+    pts += [(-x, y) for x, y in reversed(pts[1:])]
+    hoja = 'M' + ' '.join(f'{f(x)} {f(y)}' for x, y in pts) + 'Z'
+    runas = ''.join(f'<path class="e-runa" style="--i:{i}" transform="translate(0 {y}) scale(.6)" d="{RUNAS[i % len(RUNAS)]}"/>'
+                    for i, y in enumerate([-140, -120, -100, -80, -60, -40, -20, 0, 20, 40, 60, 80]))
+    cuerno = 'M9 110C24 114 40 108 46 88 49 78 46 68 40 62 41 78 34 94 10 100Z'
     return (
-        f'<path d="M0 -150 11 -132V90L0 98-11 90V-132Z" fill="url(#{g("acero")})" stroke="{PLOMO}" stroke-width="2.2" stroke-linejoin="round"/>'
-        f'<g fill="none" stroke="{ARCANO}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#{g("brillo")})">{runas}</g>'
-        # Guarda con cuernos, empuñadura y pomo con gema
-        f'<path d="M-32 92Q-21 103-8 98H8Q21 103 32 92L25 110H-25Z" fill="#3A4458" stroke="{PLOMO}" stroke-width="2.2" stroke-linejoin="round"/>'
-        f'<path d="M-25 110H25" stroke="url(#{g("oro")})" stroke-width="3"/>'
-        f'<rect x="-4.5" y="110" width="9" height="22" rx="2" fill="#2A2F45" stroke="{PLOMO}" stroke-width="1.6"/>'
-        f'<circle cy="138" r="7" fill="{ARCANO}" stroke="{PLOMO}" stroke-width="2"/>')
+        f'<path d="{hoja}" fill="url(#{g("acero")})" stroke="{PLOMO}" stroke-width="2.2" stroke-linejoin="round"/>'
+        # Canaladura central oscura con las runas
+        f'<rect x="-4.5" y="-150" width="9" height="244" rx="4.5" fill="#26324E" fill-opacity=".85"/>'
+        f'<g fill="none" stroke="{ARCANO}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" filter="url(#{g("brillo")})">{runas}</g>'
+        # Cuernos de la guarda, curvados hacia la hoja
+        f'<g fill="url(#{g("acero")})" stroke="{PLOMO}" stroke-width="2.2" stroke-linejoin="round">'
+        f'<path d="{cuerno}"/><path transform="scale(-1 1)" d="{cuerno}"/></g>'
+        # Calavera con ojos azules
+        f'<path d="M0 94C-12 94-15 101-15 108-15 114-11 117-9 118V125H9V118C11 117 15 114 15 108 15 101 12 94 0 94Z" '
+        f'fill="#DDE2EC" stroke="{PLOMO}" stroke-width="2" stroke-linejoin="round"/>'
+        f'<g fill="{ARCANO}" stroke="{PLOMO}" stroke-width="1.2" filter="url(#{g("brillo")})">'
+        f'<path d="M-9 106-2 107-3 112-8 111Z"/><path d="M9 106 2 107 3 112 8 111Z"/></g>'
+        f'<path d="M-4 125V120M0 125V120M4 125V120" stroke="{PLOMO}" stroke-width="1.2"/>'
+        # Puño forrado y pomo con pinchos
+        f'<rect x="-5" y="125" width="10" height="28" rx="2" fill="#2A2F45" stroke="{PLOMO}" stroke-width="1.8"/>'
+        f'<path d="M-5 131 5 135M-5 138 5 142M-5 145 5 149" stroke="#5E6886" stroke-width="1.5"/>'
+        f'<path d="M0 152 6 157 13 156 8 162 10 169 3 166 0 173-3 166-10 169-8 162-13 156-6 157Z" '
+        f'fill="url(#{g("acero")})" stroke="{PLOMO}" stroke-width="1.8" stroke-linejoin="round"/>'
+        f'<circle cy="162" r="3.2" fill="{ARCANO}" stroke="{PLOMO}" stroke-width="1"/>')
 
 
 def sharingan(g):
@@ -116,12 +133,12 @@ def emblema(animado, pre):
     g = lambda n: f'{pre}{n}'
     partes = []
 
-    # Alas (detrás de todo) y armas cruzadas detrás del anillo
-    partes.append(f'<g class="e-alas">{ala(g)}<g transform="scale(-1 1)">{ala(g)}</g></g>')
-    partes.append(f'<g transform="rotate(-45)">{espada_runica(g)}</g>')
-    partes.append(f'<g transform="rotate(45)">{llave_espada(g)}</g>')
+    # Armas cruzadas detrás del anillo: Frostmourne con la punta arriba a la izquierda y la Cadena Reino
+    # arriba a la derecha; sus guardas asoman abajo
+    partes.append(f'<g transform="rotate(-45) scale(1.1)">{espada_arthas(g)}</g>')
+    partes.append(f'<g transform="rotate(45) scale(1.1)">{llave_espada(g)}</g>')
 
-    # Puntas biseladas arriba y abajo
+    # Puntas biseladas arriba (bajo la cimera) y abajo
     puntas = ''.join(
         f'<g transform="rotate({a})"><path d="M0 -122 -16 -88 0 -94Z" fill="{ORO_CLARO}"/>'
         f'<path d="M0 -122 16 -88 0 -94Z" fill="{ORO_OSCURO}"/></g>' for a in (0, 180))
@@ -201,7 +218,7 @@ def emblema(animado, pre):
   </style>'''
 
     cuerpo = '\n  '.join(partes)
-    return (f'<svg class="emblema" xmlns="http://www.w3.org/2000/svg" viewBox="-172 -152 344 304" role="img" '
+    return (f'<svg class="emblema" xmlns="http://www.w3.org/2000/svg" viewBox="-174 -174 348 348" role="img" '
             f'aria-label="Emblema con elementos de Kingdom Hearts, World of Warcraft y Naruto">\n'
             f'  {defs}\n  {estilo}\n  {cuerpo}\n</svg>\n')
 

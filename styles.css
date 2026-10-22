@@ -1,0 +1,189 @@
+/* Tokens: ver DESIGN.md (heredados de kh-guia-100) */
+:root {
+  --bg: #070B1A;
+  --surface: rgba(132, 160, 255, .07);
+  --surface-2: rgba(132, 160, 255, .12);
+  --line: rgba(170, 195, 255, .18);
+  --text: #ECF0FF;
+  --text-2: #AEB9DA;
+  --gold: #EBC765;
+  --kh: #6FA8FF;
+  --pz: #FFB547;
+  --on-accent: #070B1A;
+  --lead: #050816;
+  --accent: var(--gold);
+
+  --f-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --f-ui: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --r-s: 10px;
+  --r-m: 18px;
+  --r-l: 28px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t: 200ms;
+  --gutter: 16px;
+  --max: 1120px;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #EEF2FA;
+  --surface: rgba(255, 255, 255, .72);
+  --surface-2: rgba(255, 255, 255, .92);
+  --line: rgba(20, 32, 80, .14);
+  --text: #0F1633;
+  --text-2: #3D4770;
+  --gold: #9A6B00;
+  --kh: #1F55B8;
+  --pz: #8A4D00;
+  --on-accent: #FFFFFF;
+  --lead: #FFFFFF;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.6 var(--f-ui);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, p, dl, dd { margin: 0; }
+h1, h2, h3 { line-height: 1.15; }
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+main:focus { outline: none; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--gold); color: var(--bg); padding: 8px 14px; border-radius: var(--r-s); font-weight: 600; }
+.skip:focus { top: 12px; }
+
+/* Cielo: malla de color con los acentos de los proyectos */
+.sky {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60vmax 40vmax at 8% -10%, color-mix(in srgb, var(--kh) 15%, transparent), transparent 70%),
+    radial-gradient(50vmax 40vmax at 100% 105%, color-mix(in srgb, var(--pz) 9%, transparent), transparent 70%),
+    var(--bg);
+}
+
+/* ---------- cabecera ---------- */
+.hero {
+  position: relative; isolation: isolate;
+  max-width: var(--max); margin: 0 auto;
+  padding: 112px var(--gutter) 72px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  align-items: center; gap: 48px;
+}
+.hero-copy { display: grid; gap: 20px; justify-items: start; }
+/* Nombre: oro grabado con bandas de metal (rótulos de WoW) y un leve brillo arcano */
+.hero-name {
+  font: 900 clamp(2.6rem, 7vw, 4.8rem)/1.02 var(--f-display); letter-spacing: .04em;
+  background: linear-gradient(180deg, #FFF6C8 0%, #F4C95A 38%, #9A6418 52%, #F8D978 70%, #B07A22 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 #2A1A05) drop-shadow(0 0 22px rgba(125, 232, 255, .22));
+  animation: rise 900ms var(--ease) both;
+}
+:root[data-theme="light"] .hero-name {
+  background-image: linear-gradient(180deg, #A87412 0%, #7A4E0C 50%, #5A3608 100%);
+  filter: none;
+}
+.hero-sub { color: var(--text-2); font-size: 1.25rem; font-weight: 600; animation: rise 900ms 120ms var(--ease) both; }
+.hero-links { animation: rise 900ms 220ms var(--ease) both; }
+.link-plain {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 600; text-decoration: none;
+  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.link-plain svg { width: 18px; height: 18px; fill: currentColor; }
+.link-plain:hover { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: var(--surface-2); }
+
+.hero-emblem { grid-column: 2; grid-row: 1; aspect-ratio: 344 / 304; width: 100%; }
+
+.theme {
+  position: absolute; top: 20px; right: var(--gutter);
+  width: 40px; height: 40px; display: grid; place-items: center;
+  color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+  cursor: pointer; transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.theme:hover { background: var(--surface-2); border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); }
+.theme svg { width: 18px; height: 18px; fill: currentColor; }
+.theme .i-sun { display: none; }
+:root[data-theme="light"] .theme .i-sun { display: block; }
+:root[data-theme="light"] .theme .i-moon { display: none; }
+
+/* ---------- emblema KH + WoW (generado con notas/logo.py; su animación va dentro del SVG) ---------- */
+.emblema { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 0 36px rgba(125, 232, 255, .18)); }
+:root[data-theme="light"] .emblema { filter: drop-shadow(0 10px 24px rgba(15, 22, 51, .22)); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---------- proyectos ---------- */
+main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) 96px; }
+.section-title {
+  font-weight: 800; font-size: 1.563rem; letter-spacing: -.01em;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line);
+}
+
+.project {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 48px; align-items: center; margin-top: 72px;
+}
+.project-kh { --accent: var(--kh); }
+.project-pz { --accent: var(--pz); }
+
+/* Marco de la captura: plomo de vidriera teñido del color del proyecto */
+.shot {
+  display: block; padding: 10px; border-radius: var(--r-l);
+  background: var(--surface); border: 1px solid var(--line);
+  box-shadow: 0 0 0 0 transparent;
+  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.shot img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r-m); }
+.project:hover .shot, .project:focus-within .shot {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.project-copy { display: grid; gap: 20px; align-content: center; }
+.project-name { font: 700 clamp(1.6rem, 3.2vw, 2.2rem)/1.1 var(--f-display); letter-spacing: .02em; color: var(--accent); }
+.project-what { color: var(--text-2); max-width: 62ch; }
+
+.facts { display: grid; gap: 12px; }
+.facts div { display: grid; gap: 2px; padding-left: 14px; border-left: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.facts dt { font-size: .8125rem; font-weight: 600; color: var(--text-2); }
+.facts dd { font-size: .9375rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn, .btn-2 {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 12px 22px; border-radius: 999px;
+  font: 800 .9375rem/1 var(--f-ui); text-decoration: none;
+  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.btn { background: var(--accent); color: var(--on-accent); }
+.btn:hover { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent); }
+.btn-2 { border: 1px solid var(--line); background: var(--surface); font-weight: 600; }
+.btn-2:hover { border-color: var(--accent); background: var(--surface-2); }
+
+.foot {
+  width: calc(min(var(--max), 100%) - 2 * var(--gutter)); margin: 0 auto; padding: 24px 0 48px;
+  border-top: 1px solid var(--line); color: var(--text-2); font-size: .875rem;
+}
+.foot p { max-width: 70ch; }
+
+/* ---------- móvil y tableta ---------- */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; padding-top: 72px; padding-bottom: 48px; gap: 28px; }
+  .hero-emblem { grid-column: auto; grid-row: auto; width: min(340px, 88vw); }
+  .project { grid-template-columns: 1fr; gap: 24px; margin-top: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

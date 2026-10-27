@@ -1,17 +1,23 @@
 /* Tokens: ver DESIGN.md (heredados de kh-guia-100) */
 :root {
   --bg: #070B1A;
+  --bg-2: #0C1330;
   --surface: rgba(132, 160, 255, .07);
   --surface-2: rgba(132, 160, 255, .12);
   --line: rgba(170, 195, 255, .18);
   --text: #ECF0FF;
   --text-2: #AEB9DA;
   --gold: #EBC765;
-  --kh: #6FA8FF;
-  --pz: #FFB547;
-  --on-accent: #070B1A;
+  --gold-ink: #1A1404;
   --lead: #050816;
-  --accent: var(--gold);
+  /* Acentos de los juegos, los mismos de la guía */
+  --kh: #6FA8FF;
+  --kh2fm: #8C9AFF;
+  --kh3: #B9ABFF;
+  --ddd: #FF66B2;
+  --aqua: #63C9FF;
+  --ventus: #7EE3A0;
+  --terra: #E7A35E;
 
   --f-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
   --f-ui: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -20,29 +26,36 @@
   --r-m: 18px;
   --r-l: 28px;
   --ease: cubic-bezier(.2, .7, .2, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
   --t: 200ms;
   --gutter: 16px;
-  --max: 1120px;
+  --max: 1180px;
   color-scheme: dark;
 }
 
 :root[data-theme="light"] {
   --bg: #EEF2FA;
+  --bg-2: #E2E8F6;
   --surface: rgba(255, 255, 255, .72);
   --surface-2: rgba(255, 255, 255, .92);
   --line: rgba(20, 32, 80, .14);
   --text: #0F1633;
   --text-2: #3D4770;
   --gold: #9A6B00;
-  --kh: #1F55B8;
-  --pz: #8A4D00;
-  --on-accent: #FFFFFF;
+  --gold-ink: #FFFFFF;
   --lead: #FFFFFF;
+  --kh: #1F55B8;
+  --kh2fm: #3343B3;
+  --kh3: #5A3DB8;
+  --ddd: #B3105F;
+  --aqua: #0B6EA8;
+  --ventus: #1E7A43;
+  --terra: #9A5412;
   color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
   min-height: 100svh;
@@ -50,140 +63,298 @@ body {
   color: var(--text);
   font: 400 1rem/1.6 var(--f-ui);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3, p, dl, dd { margin: 0; }
-h1, h2, h3 { line-height: 1.15; }
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
 
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
-main:focus { outline: none; }
-.skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--gold); color: var(--bg); padding: 8px 14px; border-radius: var(--r-s); font-weight: 600; }
+section:focus { outline: none; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 80; background: var(--gold); color: var(--gold-ink); padding: 8px 14px; border-radius: var(--r-s); font-weight: 600; }
 .skip:focus { top: 12px; }
 
-/* Cielo: malla de color con los acentos de los proyectos */
-.sky {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(60vmax 40vmax at 8% -10%, color-mix(in srgb, var(--kh) 15%, transparent), transparent 70%),
-    radial-gradient(50vmax 40vmax at 100% 105%, color-mix(in srgb, var(--pz) 9%, transparent), transparent 70%),
-    var(--bg);
-}
+/* ---------- vidriera (la misma de la guía) ---------- */
+.vidriera { width: 100%; height: 100%; display: block; overflow: visible; }
+.v-rim { fill: color-mix(in srgb, var(--gold) 55%, var(--bg)); }
+.v-lead path { stroke: var(--lead); stroke-width: 2.2; stroke-linejoin: round; }
+.v-ring { fill: none; stroke: var(--lead); stroke-width: 3; }
+.v-medal { fill: #C9D6F2; stroke: var(--lead); stroke-width: 2.4; }
+.v-core { stroke: var(--lead); stroke-width: 3; }
+.v-crown { fill: var(--gold); stroke: var(--lead); stroke-width: 1.2; }
+/* Gira sola y, además, avanza con el scroll (--giro lo pone main.js) */
+.glass-spin { width: 100%; height: 100%; rotate: var(--giro, 0deg); }
+.glass-spin .vidriera { animation: spin 160s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
 
-/* ---------- cabecera ---------- */
+/* ---------- portada ---------- */
 .hero {
-  position: relative; isolation: isolate;
-  max-width: var(--max); margin: 0 auto;
-  padding: 112px var(--gutter) 72px;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
-  align-items: center; gap: 48px;
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 100svh; display: grid; align-items: center;
+  padding: 96px var(--gutter) 120px;
 }
-.hero-copy { display: grid; gap: 20px; justify-items: start; }
-/* Nombre: oro grabado con bandas de metal (rótulos de WoW) y un leve brillo arcano */
+.hero-aurora {
+  position: absolute; inset: -25%; z-index: -4; pointer-events: none;
+  background:
+    radial-gradient(32% 38% at 20% 36%, color-mix(in srgb, var(--kh) 30%, transparent), transparent 75%),
+    radial-gradient(28% 34% at 54% 22%, color-mix(in srgb, var(--ddd) 20%, transparent), transparent 75%),
+    radial-gradient(34% 40% at 80% 50%, color-mix(in srgb, var(--kh3) 26%, transparent), transparent 75%),
+    radial-gradient(42% 30% at 46% 92%, color-mix(in srgb, var(--aqua) 16%, transparent), transparent 75%);
+  will-change: transform;
+  animation: aurora 26s cubic-bezier(.45, 0, .55, 1) infinite alternate;
+}
+:root[data-theme="light"] .hero-aurora { opacity: .75; }
+@keyframes aurora {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  100% { transform: translate3d(4%, -3%, 0) rotate(10deg) scale(1.12); }
+}
+/* Vidriera gigante centrada detrás del emblema */
+.hero-glass {
+  position: absolute; z-index: -3; top: 50%; left: 72%; width: min(150vw, 1200px); aspect-ratio: 1;
+  translate: -50% -50%; opacity: .2; pointer-events: none;
+  mask-image: radial-gradient(closest-side, #000 45%, transparent 100%);
+  animation: encender 1800ms var(--ease-out) both;
+}
+:root[data-theme="light"] .hero-glass { opacity: .26; }
+@keyframes encender { from { opacity: 0; scale: .82; } }
+/* Fundido inferior: la portada se funde con el resto de la página */
+.hero::after {
+  content: ""; position: absolute; inset: auto 0 0; height: 180px; z-index: -1; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+.chispas { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; pointer-events: none; }
+
+.hero-inner {
+  width: min(var(--max), 100%); margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 64px);
+}
+.hero-copy { display: grid; gap: 28px; justify-items: start; }
+
+/* Nombre: oro grabado con un destello que lo recorre cada pocos segundos */
 .hero-name {
-  font: 900 clamp(2.6rem, 7vw, 4.8rem)/1.02 var(--f-display); letter-spacing: .04em;
-  background: linear-gradient(180deg, #FFF6C8 0%, #F4C95A 38%, #9A6418 52%, #F8D978 70%, #B07A22 100%);
+  font: 900 clamp(3rem, 8.4vw, 7.2rem)/.98 var(--f-display); letter-spacing: .02em;
+  background:
+    linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, .95) 50%, transparent 58%) -60% 0 / 250% 100% no-repeat,
+    linear-gradient(180deg, #FFF6C8 0%, #F4C95A 38%, #9A6418 52%, #F8D978 70%, #B07A22 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 2px 0 #2A1A05) drop-shadow(0 0 22px rgba(125, 232, 255, .22));
-  animation: rise 900ms var(--ease) both;
+  filter: drop-shadow(0 2px 0 #2A1A05) drop-shadow(0 0 28px rgba(125, 200, 255, .25));
+  animation: entrar 1100ms var(--ease-out) both, destello 7s 1.4s ease-in-out infinite;
 }
+.hero-name span { display: block; }
 :root[data-theme="light"] .hero-name {
-  background-image: linear-gradient(180deg, #A87412 0%, #7A4E0C 50%, #5A3608 100%);
+  background-image:
+    linear-gradient(105deg, transparent 42%, rgba(255, 236, 170, .9) 50%, transparent 58%),
+    linear-gradient(180deg, #A87412 0%, #7A4E0C 50%, #5A3608 100%);
   filter: none;
 }
-.hero-sub { color: var(--text-2); font-size: 1.25rem; font-weight: 600; animation: rise 900ms 120ms var(--ease) both; }
-.hero-links { animation: rise 900ms 220ms var(--ease) both; }
-.link-plain {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-weight: 600; text-decoration: none;
-  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
-  transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+@keyframes destello { 0%, 70% { background-position: 160% 0, 0 0; } 100% { background-position: -60% 0, 0 0; } }
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(28px); filter: blur(8px); }
+  to { opacity: 1; transform: none; }
 }
-.link-plain svg { width: 18px; height: 18px; fill: currentColor; }
-.link-plain:hover { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: var(--surface-2); }
+.hero-sub {
+  max-width: 34ch; color: var(--text); font-size: clamp(1.125rem, 1.8vw, 1.375rem); font-weight: 600; line-height: 1.45;
+  animation: entrar 1100ms 160ms var(--ease-out) both;
+}
+.hero-links { display: flex; flex-wrap: wrap; gap: 12px; animation: entrar 1100ms 300ms var(--ease-out) both; }
 
-.hero-emblem { grid-column: 2; grid-row: 1; aspect-ratio: 1; width: 100%; }
+/* Botones */
+.btn {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 13px 22px; border-radius: 999px;
+  font: 800 1rem/1 var(--f-ui); text-decoration: none;
+  transition: transform var(--t) var(--ease), box-shadow 240ms var(--ease), border-color var(--t) var(--ease), background var(--t) var(--ease);
+}
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn:active { transform: scale(.97); }
+.btn-oro { background: var(--gold); color: var(--gold-ink); }
+.btn-oro svg { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: translate var(--t) var(--ease); }
+.btn-oro:hover { box-shadow: 0 0 0 5px color-mix(in srgb, var(--gold) 24%, transparent), 0 10px 32px -8px color-mix(in srgb, var(--gold) 60%, transparent); }
+.btn-oro:hover svg { translate: 4px 0; }
+/* Brillo que cruza el botón al pasar el ratón */
+.btn-oro::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%) 160% 0 / 250% 100% no-repeat;
+  transition: background-position 900ms var(--ease-out);
+}
+.btn-oro:hover::after { background-position: -60% 0; }
+.btn-vidrio {
+  color: var(--text); font-weight: 600; border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter: blur(10px);
+}
+.btn-vidrio svg { fill: currentColor; }
+.btn-vidrio:hover { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: var(--surface-2); }
+.btn-xl { min-height: 56px; padding: 16px 30px; font-size: 1.125rem; }
+
+/* Emblema: flota despacio y se inclina hacia el ratón */
+.hero-emblem {
+  width: min(100%, 500px); aspect-ratio: 1; justify-self: center;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 600ms var(--ease-out);
+  animation: emblema-in 1600ms 200ms var(--ease-out) both;
+}
+.hero-emblem.is-tilt { transition-duration: 140ms; }
+.emblema-flota { width: 100%; height: 100%; animation: flotar 7s ease-in-out infinite; }
+@keyframes flotar { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+@keyframes emblema-in { from { opacity: 0; scale: .7; rotate: -25deg; filter: blur(10px); } }
+.emblema { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 0 40px rgba(125, 200, 255, .25)); }
+:root[data-theme="light"] .emblema { filter: drop-shadow(0 12px 26px rgba(15, 22, 51, .25)); }
+
+.hero-bajar {
+  position: absolute; left: 50%; bottom: 28px; translate: -50% 0;
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 60%, transparent); color: var(--text-2);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
+  animation: bajar 2.6s cubic-bezier(.45, 0, .55, 1) 1.6s infinite;
+}
+.hero-bajar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hero-bajar:hover { color: var(--text); border-color: color-mix(in srgb, var(--gold) 60%, var(--line)); }
+@keyframes bajar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
 .theme {
-  position: absolute; top: 20px; right: var(--gutter);
-  width: 40px; height: 40px; display: grid; place-items: center;
-  color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
-  cursor: pointer; transition: border-color var(--t) var(--ease), background var(--t) var(--ease);
+  position: absolute; top: 20px; right: max(var(--gutter), calc((100% - var(--max)) / 2));
+  width: 44px; height: 44px; display: grid; place-items: center;
+  color: var(--text); background: color-mix(in srgb, var(--bg) 55%, transparent); border: 1px solid var(--line); border-radius: 999px;
+  backdrop-filter: blur(10px); cursor: pointer;
+  transition: border-color var(--t) var(--ease), background var(--t) var(--ease), rotate 400ms var(--ease-out);
 }
-.theme:hover { background: var(--surface-2); border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); }
+.theme:hover { background: var(--surface-2); border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); rotate: 20deg; }
 .theme svg { width: 18px; height: 18px; fill: currentColor; }
 .theme .i-sun { display: none; }
 :root[data-theme="light"] .theme .i-sun { display: block; }
 :root[data-theme="light"] .theme .i-moon { display: none; }
 
-/* ---------- emblema KH + WoW (generado con notas/logo.py; su animación va dentro del SVG) ---------- */
-.emblema { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 0 36px rgba(125, 232, 255, .18)); }
-:root[data-theme="light"] .emblema { filter: drop-shadow(0 10px 24px rgba(15, 22, 51, .22)); }
+/* ---------- la guía ---------- */
+/* overflow-x: clip recorta la vidriera del escenario en los bordes de la pantalla sin crear scroll lateral */
+main { width: min(var(--max), 100%); margin: 0 auto; padding: 0 var(--gutter); overflow-x: clip; }
+.guia { padding-top: clamp(56px, 8vw, 112px); scroll-margin-top: 24px; }
+.guia-cab { display: grid; gap: 20px; max-width: 60rem; }
+.guia-titulo, .juegos-titulo {
+  font: 700 clamp(2.1rem, 5.4vw, 4.2rem)/1.02 var(--f-display); letter-spacing: .01em; text-wrap: balance;
+}
+.guia-lead { max-width: 60ch; font-size: clamp(1rem, 1.4vw, 1.1875rem); color: var(--text); }
 
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+/* Escenario: las tres colecciones sobre una vidriera que gira */
+.escenario { position: relative; isolation: isolate; margin-top: clamp(40px, 6vw, 72px); padding: clamp(32px, 6vw, 80px) 0; }
+.escenario-glass {
+  position: absolute; z-index: -1; top: 50%; left: 50%; width: min(120vw, 1000px); aspect-ratio: 1; translate: -50% -50%;
+  opacity: .16; pointer-events: none; mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+}
+.escenario-glass .vidriera { animation-direction: reverse; }
+:root[data-theme="light"] .escenario-glass { opacity: .22; }
+.colecciones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 4vw, 56px); align-items: center; }
+.col { display: grid; justify-items: center; gap: 16px; }
+.col .logo3d { width: min(100%, 360px); }
+.col .logo3d img { filter: drop-shadow(0 18px 34px rgba(0, 0, 0, .55)); }
+:root[data-theme="light"] .col .logo3d img { filter: drop-shadow(0 14px 24px rgba(15, 22, 51, .25)); }
+.col-meta { font-size: .9375rem; font-weight: 600; color: var(--text-2); }
+.col-meta b { color: var(--gold); font-weight: 800; font-variant-numeric: tabular-nums; }
 
-/* ---------- proyectos ---------- */
-main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) 96px; }
-.section-title {
-  font-weight: 800; font-size: 1.563rem; letter-spacing: -.01em;
-  padding-bottom: 16px; border-bottom: 1px solid var(--line);
+/* Logo con relieve: se inclina hacia el ratón y un destello lo recorre (la máscara es el propio logo) */
+.logo3d {
+  position: relative; display: block;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 500ms var(--ease-out);
+}
+.is-tilt .logo3d { transition-duration: 120ms; }
+.logo3d img { width: 100%; height: auto; filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .45)); }
+:root[data-theme="light"] .logo3d img { filter: drop-shadow(0 10px 18px rgba(15, 22, 51, .22)); }
+.logo3d-luz {
+  position: absolute; inset: 0; pointer-events: none;
+  -webkit-mask: var(--img) center / contain no-repeat; mask: var(--img) center / contain no-repeat;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .55) 50%, transparent 60%) 160% 0 / 260% 100% no-repeat;
+  transition: background-position 1100ms var(--ease-out);
+}
+[data-tilt]:hover .logo3d-luz, .is-in.col .logo3d-luz { background-position: -60% 0; }
+.col .logo3d-luz { transition-delay: calc(var(--k, 0) * 160ms + 400ms); }
+.col:hover .logo3d-luz { transition-delay: 0ms; }
+
+/* Cifras grandes */
+.cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(32px, 5vw, 56px); }
+.cifra {
+  display: grid; gap: 6px; align-content: start; padding: 24px 26px; border-radius: var(--r-l);
+  background: var(--surface); border: 1px solid var(--line); color: var(--text-2); font-weight: 600;
+}
+.cifra b {
+  font: 900 clamp(2.6rem, 5vw, 3.8rem)/1 var(--f-display); color: var(--gold); font-variant-numeric: tabular-nums;
 }
 
-.project {
-  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 48px; align-items: center; margin-top: 72px;
+/* ---------- qué tiene cada juego ---------- */
+.juegos { padding-top: clamp(96px, 12vw, 176px); }
+.juegos-lista { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); margin-top: clamp(28px, 4vw, 48px); }
+.juego {
+  position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(110px, 170px) 1fr; align-items: center; gap: 20px 28px;
+  padding: 24px 28px; border-radius: var(--r-l); border: 1px solid var(--line);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--tile) 18%, transparent), transparent 62%),
+    color-mix(in srgb, var(--bg) 86%, transparent);
+  transition: border-color var(--t) var(--ease), transform 300ms var(--ease-out),
+    translate 700ms var(--ease-out), opacity 600ms var(--ease-out);
 }
-.project-kh { --accent: var(--kh); }
-.project-pz { --accent: var(--pz); }
-
-/* Marco de la captura: plomo de vidriera teñido del color del proyecto */
-.shot {
-  display: block; padding: 10px; border-radius: var(--r-l);
-  background: var(--surface); border: 1px solid var(--line);
-  box-shadow: 0 0 0 0 transparent;
-  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+/* Luz que sigue al ratón dentro de la ficha (--mx/--my los pone main.js) */
+.juego::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--tile) 22%, transparent), transparent 70%);
+  transition: opacity 300ms var(--ease);
 }
-.shot img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r-m); }
-.project:hover .shot, .project:focus-within .shot {
-  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent);
+.juego { isolation: isolate; }
+.juego[data-tilt]:hover { border-color: color-mix(in srgb, var(--tile) 60%, var(--line)); transform: translateY(-4px); }
+.juego[data-tilt]:hover::before { opacity: 1; }
+.juego:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.juego-cuerpo { display: grid; gap: 8px; min-width: 0; }
+.juego h3 { font: 700 clamp(1.15rem, 2vw, 1.45rem)/1.15 var(--f-display); }
+.juego p { color: var(--text-2); font-size: .9375rem; }
+.juego-off .logo3d img { filter: grayscale(.75) drop-shadow(0 12px 22px rgba(0, 0, 0, .35)); }
+.juego .pronto {
+  justify-self: start; padding: 5px 12px; border-radius: 99px; border: 1px dashed var(--line);
+  font-weight: 700; font-size: .8125rem;
 }
+.cierre { display: flex; justify-content: center; padding: clamp(56px, 8vw, 96px) 0 0; }
 
-.project-copy { display: grid; gap: 20px; align-content: center; }
-.project-name { font: 700 clamp(1.6rem, 3.2vw, 2.2rem)/1.1 var(--f-display); letter-spacing: .02em; color: var(--accent); }
-.project-what { color: var(--text-2); max-width: 62ch; }
-
-.facts { display: grid; gap: 12px; }
-.facts div { display: grid; gap: 2px; padding-left: 14px; border-left: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line)); }
-.facts dt { font-size: .8125rem; font-weight: 600; color: var(--text-2); }
-.facts dd { font-size: .9375rem; }
-
-.actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn, .btn-2 {
-  display: inline-flex; align-items: center; min-height: 44px;
-  padding: 12px 22px; border-radius: 999px;
-  font: 800 .9375rem/1 var(--f-ui); text-decoration: none;
-  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease), background var(--t) var(--ease);
-}
-.btn { background: var(--accent); color: var(--on-accent); }
-.btn:hover { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 24%, transparent); }
-.btn-2 { border: 1px solid var(--line); background: var(--surface); font-weight: 600; }
-.btn-2:hover { border-color: var(--accent); background: var(--surface-2); }
-
+/* ---------- pie: el nombre vuelve a lo ancho ---------- */
 .foot {
-  width: calc(min(var(--max), 100%) - 2 * var(--gutter)); margin: 0 auto; padding: 24px 0 48px;
-  border-top: 1px solid var(--line); color: var(--text-2); font-size: .875rem;
+  width: min(var(--max), 100%); margin: clamp(96px, 12vw, 160px) auto 0; padding: 0 var(--gutter) 48px;
+  display: grid; gap: 20px; overflow: hidden;
 }
-.foot p { max-width: 70ch; }
+.foot-name {
+  /* «Alvaro Portillo» en Cinzel 900 mide 9,26 veces su tamaño de letra: así ocupa todo el ancho sin cortarse */
+  font: 900 calc((min(var(--max), 100vw) - 2 * var(--gutter) - 24px) / 9.4)/.9 var(--f-display); letter-spacing: .01em; white-space: nowrap;
+  color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--gold) 55%, transparent);
+  opacity: .7;
+}
+.foot-legal { max-width: 75ch; color: var(--text-2); font-size: .875rem; }
 
-/* ---------- móvil y tableta ---------- */
-@media (max-width: 860px) {
-  .hero { grid-template-columns: 1fr; padding-top: 72px; padding-bottom: 48px; gap: 28px; }
-  .hero-emblem { grid-column: auto; grid-row: auto; width: min(280px, 76vw); }
-  .project { grid-template-columns: 1fr; gap: 24px; margin-top: 56px; }
+/* ---------- entradas al hacer scroll (solo con JS y sin movimiento reducido) ---------- */
+.js-anim .reveal:not(.is-in) { opacity: 0; translate: 0 28px; }
+.js-anim .reveal { transition: opacity 800ms var(--ease-out), translate 900ms var(--ease-out), border-color var(--t) var(--ease), transform 300ms var(--ease-out); transition-delay: calc(var(--k, 0) * 90ms), calc(var(--k, 0) * 90ms), 0ms, 0ms; }
+.js-anim .col.reveal:not(.is-in) { translate: 0 40px; scale: .92; }
+.js-anim .col.reveal { transition-property: opacity, translate, scale; transition-duration: 1000ms; transition-delay: calc(var(--k, 0) * 140ms); }
+
+/* Estela de llave espada (cursor.js) */
+.estela { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+
+/* ---------- tableta y móvil ---------- */
+@media (max-width: 900px) {
+  .hero { padding-top: 80px; align-items: start; }
+  .hero-inner { grid-template-columns: 1fr; gap: 8px; }
+  .hero-emblem { grid-row: 1; width: min(300px, 72vw); }
+  .hero-glass { left: 50%; top: 30%; }
+  .colecciones { grid-template-columns: 1fr; gap: 40px; }
+  .col .logo3d { width: min(320px, 82vw); }
+  .cifras { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .hero { padding-bottom: 104px; }
+  .juego { grid-template-columns: 1fr; padding: 22px; }
+  .juego .logo3d { width: min(220px, 70%); }
+  .cifra { padding: 20px 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .glass-spin { rotate: 0deg; }
+  .hero-emblem, .logo3d { transform: none; }
+  .logo3d-luz { display: none; }
 }

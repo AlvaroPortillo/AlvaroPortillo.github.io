@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alvaro Portillo · Proyectos</title>
-  <meta name="description" content="Repositorio personal de Alvaro Portillo: guías y paneles web para Kingdom Hearts y Project Zomboid.">
+  <title>Alvaro Portillo · Guía 100&nbsp;% de Kingdom Hearts</title>
+  <meta name="description" content="Repositorio personal de Alvaro Portillo: guía para completar al 100&nbsp;% todos los Kingdom Hearts de Steam.">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,35 @@
     // Aplica el tema guardado antes de pintar para evitar parpadeos.
     try { const t = localStorage.getItem('portada:tema'); if (t) document.documentElement.dataset.theme = t; } catch {}
   </script>
+  <script type="module" src="main.js"></script>
 </head>
 <body>
-  <a class="skip" href="#proyectos">Saltar a los proyectos</a>
-  <div class="sky" aria-hidden="true"></div>
+  <a class="skip" href="#guia">Saltar a la guía</a>
 
-  <header class="hero">
-    <div class="hero-emblem">
+  <!-- Portada: aurora, vidriera gigante, chispas de luz y el emblema -->
+  <header class="hero" id="inicio">
+    <div class="hero-aurora" aria-hidden="true"></div>
+    <div class="hero-glass" aria-hidden="true"><div class="glass-spin"><svg class="vidriera" viewBox="-100 -100 200 200" aria-hidden="true"><defs><radialGradient id="vc1" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" style="stop-color:var(--kh);stop-opacity:.55"/></radialGradient></defs><circle r="98" class="v-rim"/><g class="v-lead"><path d="M0.00 -38.00 L0.00 -90.00 A90 90 0 0 1 23.29 -86.93 L9.84 -36.71 A38 38 0 0 0 0.00 -38.00Z" style="fill:var(--kh);fill-opacity:0.95"/><path d="M9.84 -36.71 L23.29 -86.93 A90 90 0 0 1 45.00 -77.94 L19.00 -32.91 A38 38 0 0 0 9.84 -36.71Z" style="fill:var(--ddd);fill-opacity:0.6"/><path d="M19.00 -32.91 L45.00 -77.94 A90 90 0 0 1 63.64 -63.64 L26.87 -26.87 A38 38 0 0 0 19.00 -32.91Z" style="fill:var(--kh3);fill-opacity:0.8"/><path d="M26.87 -26.87 L63.64 -63.64 A90 90 0 0 1 77.94 -45.00 L32.91 -19.00 A38 38 0 0 0 26.87 -26.87Z" style="fill:var(--aqua);fill-opacity:0.95"/><path d="M32.91 -19.00 L77.94 -45.00 A90 90 0 0 1 86.93 -23.29 L36.71 -9.84 A38 38 0 0 0 32.91 -19.00Z" style="fill:var(--kh);fill-opacity:0.6"/><path d="M36.71 -9.84 L86.93 -23.29 A90 90 0 0 1 90.00 0.00 L38.00 0.00 A38 38 0 0 0 36.71 -9.84Z" style="fill:var(--ddd);fill-opacity:0.8"/><path d="M38.00 0.00 L90.00 0.00 A90 90 0 0 1 86.93 23.29 L36.71 9.84 A38 38 0 0 0 38.00 0.00Z" style="fill:var(--kh3);fill-opacity:0.95"/><path d="M36.71 9.84 L86.93 23.29 A90 90 0 0 1 77.94 45.00 L32.91 19.00 A38 38 0 0 0 36.71 9.84Z" style="fill:var(--aqua);fill-opacity:0.6"/><path d="M32.91 19.00 L77.94 45.00 A90 90 0 0 1 63.64 63.64 L26.87 26.87 A38 38 0 0 0 32.91 19.00Z" style="fill:var(--kh);fill-opacity:0.8"/><path d="M26.87 26.87 L63.64 63.64 A90 90 0 0 1 45.00 77.94 L19.00 32.91 A38 38 0 0 0 26.87 26.87Z" style="fill:var(--ddd);fill-opacity:0.95"/><path d="M19.00 32.91 L45.00 77.94 A90 90 0 0 1 23.29 86.93 L9.84 36.71 A38 38 0 0 0 19.00 32.91Z" style="fill:var(--kh3);fill-opacity:0.6"/><path d="M9.84 36.71 L23.29 86.93 A90 90 0 0 1 0.00 90.00 L0.00 38.00 A38 38 0 0 0 9.84 36.71Z" style="fill:var(--aqua);fill-opacity:0.8"/><path d="M0.00 38.00 L0.00 90.00 A90 90 0 0 1 -23.29 86.93 L-9.84 36.71 A38 38 0 0 0 0.00 38.00Z" style="fill:var(--kh);fill-opacity:0.95"/><path d="M-9.84 36.71 L-23.29 86.93 A90 90 0 0 1 -45.00 77.94 L-19.00 32.91 A38 38 0 0 0 -9.84 36.71Z" style="fill:var(--ddd);fill-opacity:0.6"/><path d="M-19.00 32.91 L-45.00 77.94 A90 90 0 0 1 -63.64 63.64 L-26.87 26.87 A38 38 0 0 0 -19.00 32.91Z" style="fill:var(--kh3);fill-opacity:0.8"/><path d="M-26.87 26.87 L-63.64 63.64 A90 90 0 0 1 -77.94 45.00 L-32.91 19.00 A38 38 0 0 0 -26.87 26.87Z" style="fill:var(--aqua);fill-opacity:0.95"/><path d="M-32.91 19.00 L-77.94 45.00 A90 90 0 0 1 -86.93 23.29 L-36.71 9.84 A38 38 0 0 0 -32.91 19.00Z" style="fill:var(--kh);fill-opacity:0.6"/><path d="M-36.71 9.84 L-86.93 23.29 A90 90 0 0 1 -90.00 0.00 L-38.00 0.00 A38 38 0 0 0 -36.71 9.84Z" style="fill:var(--ddd);fill-opacity:0.8"/><path d="M-38.00 0.00 L-90.00 0.00 A90 90 0 0 1 -86.93 -23.29 L-36.71 -9.84 A38 38 0 0 0 -38.00 0.00Z" style="fill:var(--kh3);fill-opacity:0.95"/><path d="M-36.71 -9.84 L-86.93 -23.29 A90 90 0 0 1 -77.94 -45.00 L-32.91 -19.00 A38 38 0 0 0 -36.71 -9.84Z" style="fill:var(--aqua);fill-opacity:0.6"/><path d="M-32.91 -19.00 L-77.94 -45.00 A90 90 0 0 1 -63.64 -63.64 L-26.87 -26.87 A38 38 0 0 0 -32.91 -19.00Z" style="fill:var(--kh);fill-opacity:0.8"/><path d="M-26.87 -26.87 L-63.64 -63.64 A90 90 0 0 1 -45.00 -77.94 L-19.00 -32.91 A38 38 0 0 0 -26.87 -26.87Z" style="fill:var(--ddd);fill-opacity:0.95"/><path d="M-19.00 -32.91 L-45.00 -77.94 A90 90 0 0 1 -23.29 -86.93 L-9.84 -36.71 A38 38 0 0 0 -19.00 -32.91Z" style="fill:var(--kh3);fill-opacity:0.6"/><path d="M-9.84 -36.71 L-23.29 -86.93 A90 90 0 0 1 -0.00 -90.00 L-0.00 -38.00 A38 38 0 0 0 -9.84 -36.71Z" style="fill:var(--aqua);fill-opacity:0.8"/></g><circle r="90" class="v-ring"/><circle cx="0.00" cy="-64.00" r="13" class="v-medal"/><circle cx="55.43" cy="-32.00" r="13" class="v-medal"/><circle cx="55.43" cy="32.00" r="13" class="v-medal"/><circle cx="0.00" cy="64.00" r="13" class="v-medal"/><circle cx="-55.43" cy="32.00" r="13" class="v-medal"/><circle cx="-55.43" cy="-32.00" r="13" class="v-medal"/><circle r="38" fill="url(#vc1)" class="v-core"/><path class="v-crown" d="M-16 9 -13 -9 -5 -1 0 -14 5 -1 13 -9 16 9Z"/><rect class="v-crown" x="-16" y="11" width="32" height="4" rx="2"/></svg></div></div>
+    <canvas class="chispas" aria-hidden="true"></canvas>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 class="hero-name"><span>Alvaro</span> <span>Portillo</span></h1>
+        <p class="hero-sub">Hago guías para completar Kingdom Hearts al 100&nbsp;%: cada logro, cada cofre y cada jefe, con su fuente.</p>
+        <p class="hero-links">
+          <a class="btn btn-oro" href="https://alvaroportillo.github.io/kh-guia-100/">
+            Abrir la guía de KH
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-vidrio" href="https://github.com/AlvaroPortillo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 7.4 4 12l4.6 4.6 1.4-1.4L6.8 12 10 8.8Zm6.8 0L14 8.8l3.2 3.2-3.2 3.2 1.4 1.4L20 12Z"/></svg>
+            Mi GitHub
+          </a>
+        </p>
+      </div>
+
+      <div class="hero-emblem" data-tilt>
+        <div class="emblema-flota">
     <!-- logo:inicio -->
 <svg class="emblema" xmlns="http://www.w3.org/2000/svg" viewBox="-174 -174 348 348" role="img" aria-label="Emblema con elementos de Kingdom Hearts, World of Warcraft y Naruto">
   <defs>
@@ -66,73 +88,129 @@
   <circle r="30" fill="url(#hiris)" stroke="#0A0E1A" stroke-width="3"/><circle r="18.5" fill="none" stroke="#2A0404" stroke-width="1.8"/><g class="e-tomoe" fill="#140303"><g transform="rotate(60) translate(0 -18.5) rotate(-90) scale(1.15)"><circle r="4.6"/><path d="M4.4 -1.4C5 -6 2 -10 -3 -11.5C0 -8.5 .8 -6 -1.5 -4.4Z"/></g><g transform="rotate(180) translate(0 -18.5) rotate(-90) scale(1.15)"><circle r="4.6"/><path d="M4.4 -1.4C5 -6 2 -10 -3 -11.5C0 -8.5 .8 -6 -1.5 -4.4Z"/></g><g transform="rotate(300) translate(0 -18.5) rotate(-90) scale(1.15)"><circle r="4.6"/><path d="M4.4 -1.4C5 -6 2 -10 -3 -11.5C0 -8.5 .8 -6 -1.5 -4.4Z"/></g></g><g transform="translate(0 3) scale(.34)"><path d="M0 22C-6 15-26 4-26-8-26-18-18-24-10-24-4-24 0-20 0-15 0-20 4-24 10-24 18-24 26-18 26-8 26 4 6 15 0 22Z" fill="#140303" stroke="#140303" stroke-width="3" stroke-linejoin="round"/><path d="M-10-14-12-31-5-23 0-36 5-23 12-31 10-14Z" fill="url(#horo)" stroke="#140303" stroke-width="4" stroke-linejoin="round"/></g>
 </svg>
     <!-- logo:fin -->
+        </div>
+      </div>
     </div>
-    <div class="hero-copy">
-      <h1 class="hero-name">Alvaro Portillo</h1>
-      <p class="hero-sub">Repositorio personal</p>
-      <p class="hero-links">
-        <a class="link-plain" href="https://github.com/AlvaroPortillo">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 7.4 4 12l4.6 4.6 1.4-1.4L6.8 12 10 8.8Zm6.8 0L14 8.8l3.2 3.2-3.2 3.2 1.4 1.4L20 12Z"/></svg>
-          Mi GitHub
-        </a>
-      </p>
-    </div>
+
+    <a class="hero-bajar" href="#guia" aria-label="Ver la guía">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+
     <button class="theme" type="button" aria-label="Cambiar a tema claro" data-theme-toggle>
       <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
       <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M11 1.5h2v3h-2zM11 19.5h2v3h-2zM1.5 11h3v2h-3zM19.5 11h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zM16.3 17.7l1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zM16.3 6.3l2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>
     </button>
   </header>
 
-  <main id="proyectos" tabindex="-1">
-    <h2 class="section-title">Proyectos</h2>
-
-    <article class="project project-kh" aria-labelledby="p-kh">
-      <a class="shot" href="https://alvaroportillo.github.io/kh-guia-100/" tabindex="-1" aria-hidden="true">
-        <img src="img/kh-guia-100.webp" alt="" width="1200" height="750" loading="lazy">
-      </a>
-      <div class="project-copy">
-        <h3 class="project-name" id="p-kh">Guía 100 % de Kingdom Hearts</h3>
-        <p class="project-what">Guía para completar al 100 % Kingdom Hearts HD 1.5+2.5 ReMIX y Kingdom Hearts III en Steam: logros, coleccionables, builds, jefes y comandos de cada personaje.</p>
-        <dl class="facts">
-          <div><dt>Juegos</dt><dd>Birth by Sleep Final Mix, Kingdom Hearts Final Mix y Kingdom Hearts III (en preparación)</dd></div>
-        </dl>
-        <p class="actions"><a class="btn" href="https://alvaroportillo.github.io/kh-guia-100/">Abrir la guía</a></p>
+  <main>
+    <!-- La guía: las tres colecciones de Steam sobre su vidriera -->
+    <section class="guia" id="guia" tabindex="-1" aria-labelledby="t-guia">
+      <div class="guia-cab">
+        <h2 class="guia-titulo reveal" id="t-guia">Guía 100&nbsp;% de Kingdom Hearts</h2>
+        <p class="guia-lead reveal" style="--k:1">Todos los Kingdom Hearts de Steam en una sola web: logros, coleccionables, builds, jefes y comandos de cada personaje. Marcas lo que vas consiguiendo y la guía lleva dos cuentas a la vez: los logros de Steam y el 100&nbsp;% de cada juego.</p>
       </div>
-    </article>
 
-    <article class="project project-pz" aria-labelledby="p-pz">
-      <a class="shot" href="https://alvaroportillo.github.io/ProyectZomboid/" tabindex="-1" aria-hidden="true">
-        <img src="img/proyectzomboid.webp" alt="" width="1200" height="750" loading="lazy">
-      </a>
-      <div class="project-copy">
-        <h3 class="project-name" id="p-pz">Project Zomboid</h3>
-        <p class="project-what">Panel de consulta para la versión 42.21, pensado para tenerlo abierto en otra pantalla mientras juegas: qué arma de fuego vale más, qué desbloquea cada habilidad nivel a nivel y cómo curar cada herida.</p>
-        <dl class="facts">
-          <div><dt>Secciones</dt><dd>Armas, armas del mod Firearms B42, habilidades y curación. En directo: próximamente</dd></div>
-        </dl>
-        <p class="actions"><a class="btn" href="https://alvaroportillo.github.io/ProyectZomboid/">Abrir el panel</a></p>
+      <div class="escenario">
+        <div class="escenario-glass" aria-hidden="true"><div class="glass-spin"><svg class="vidriera" viewBox="-100 -100 200 200" aria-hidden="true"><defs><radialGradient id="vc2" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" style="stop-color:var(--kh);stop-opacity:.55"/></radialGradient></defs><circle r="98" class="v-rim"/><g class="v-lead"><path d="M0.00 -38.00 L0.00 -90.00 A90 90 0 0 1 20.03 -87.74 L8.46 -37.05 A38 38 0 0 0 0.00 -38.00Z" style="fill:var(--kh);fill-opacity:0.95"/><path d="M8.46 -37.05 L20.03 -87.74 A90 90 0 0 1 39.05 -81.09 L16.49 -34.24 A38 38 0 0 0 8.46 -37.05Z" style="fill:var(--kh2fm);fill-opacity:0.6"/><path d="M16.49 -34.24 L39.05 -81.09 A90 90 0 0 1 56.11 -70.36 L23.69 -29.71 A38 38 0 0 0 16.49 -34.24Z" style="fill:var(--aqua);fill-opacity:0.8"/><path d="M23.69 -29.71 L56.11 -70.36 A90 90 0 0 1 70.36 -56.11 L29.71 -23.69 A38 38 0 0 0 23.69 -29.71Z" style="fill:var(--ventus);fill-opacity:0.95"/><path d="M29.71 -23.69 L70.36 -56.11 A90 90 0 0 1 81.09 -39.05 L34.24 -16.49 A38 38 0 0 0 29.71 -23.69Z" style="fill:var(--terra);fill-opacity:0.6"/><path d="M34.24 -16.49 L81.09 -39.05 A90 90 0 0 1 87.74 -20.03 L37.05 -8.46 A38 38 0 0 0 34.24 -16.49Z" style="fill:var(--ddd);fill-opacity:0.8"/><path d="M37.05 -8.46 L87.74 -20.03 A90 90 0 0 1 90.00 0.00 L38.00 0.00 A38 38 0 0 0 37.05 -8.46Z" style="fill:var(--kh3);fill-opacity:0.95"/><path d="M38.00 0.00 L90.00 0.00 A90 90 0 0 1 87.74 20.03 L37.05 8.46 A38 38 0 0 0 38.00 0.00Z" style="fill:var(--kh);fill-opacity:0.6"/><path d="M37.05 8.46 L87.74 20.03 A90 90 0 0 1 81.09 39.05 L34.24 16.49 A38 38 0 0 0 37.05 8.46Z" style="fill:var(--kh2fm);fill-opacity:0.8"/><path d="M34.24 16.49 L81.09 39.05 A90 90 0 0 1 70.36 56.11 L29.71 23.69 A38 38 0 0 0 34.24 16.49Z" style="fill:var(--aqua);fill-opacity:0.95"/><path d="M29.71 23.69 L70.36 56.11 A90 90 0 0 1 56.11 70.36 L23.69 29.71 A38 38 0 0 0 29.71 23.69Z" style="fill:var(--ventus);fill-opacity:0.6"/><path d="M23.69 29.71 L56.11 70.36 A90 90 0 0 1 39.05 81.09 L16.49 34.24 A38 38 0 0 0 23.69 29.71Z" style="fill:var(--terra);fill-opacity:0.8"/><path d="M16.49 34.24 L39.05 81.09 A90 90 0 0 1 20.03 87.74 L8.46 37.05 A38 38 0 0 0 16.49 34.24Z" style="fill:var(--ddd);fill-opacity:0.95"/><path d="M8.46 37.05 L20.03 87.74 A90 90 0 0 1 0.00 90.00 L0.00 38.00 A38 38 0 0 0 8.46 37.05Z" style="fill:var(--kh3);fill-opacity:0.6"/><path d="M0.00 38.00 L0.00 90.00 A90 90 0 0 1 -20.03 87.74 L-8.46 37.05 A38 38 0 0 0 0.00 38.00Z" style="fill:var(--kh);fill-opacity:0.8"/><path d="M-8.46 37.05 L-20.03 87.74 A90 90 0 0 1 -39.05 81.09 L-16.49 34.24 A38 38 0 0 0 -8.46 37.05Z" style="fill:var(--kh2fm);fill-opacity:0.95"/><path d="M-16.49 34.24 L-39.05 81.09 A90 90 0 0 1 -56.11 70.36 L-23.69 29.71 A38 38 0 0 0 -16.49 34.24Z" style="fill:var(--aqua);fill-opacity:0.6"/><path d="M-23.69 29.71 L-56.11 70.36 A90 90 0 0 1 -70.36 56.11 L-29.71 23.69 A38 38 0 0 0 -23.69 29.71Z" style="fill:var(--ventus);fill-opacity:0.8"/><path d="M-29.71 23.69 L-70.36 56.11 A90 90 0 0 1 -81.09 39.05 L-34.24 16.49 A38 38 0 0 0 -29.71 23.69Z" style="fill:var(--terra);fill-opacity:0.95"/><path d="M-34.24 16.49 L-81.09 39.05 A90 90 0 0 1 -87.74 20.03 L-37.05 8.46 A38 38 0 0 0 -34.24 16.49Z" style="fill:var(--ddd);fill-opacity:0.6"/><path d="M-37.05 8.46 L-87.74 20.03 A90 90 0 0 1 -90.00 0.00 L-38.00 0.00 A38 38 0 0 0 -37.05 8.46Z" style="fill:var(--kh3);fill-opacity:0.8"/><path d="M-38.00 0.00 L-90.00 0.00 A90 90 0 0 1 -87.74 -20.03 L-37.05 -8.46 A38 38 0 0 0 -38.00 0.00Z" style="fill:var(--kh);fill-opacity:0.95"/><path d="M-37.05 -8.46 L-87.74 -20.03 A90 90 0 0 1 -81.09 -39.05 L-34.24 -16.49 A38 38 0 0 0 -37.05 -8.46Z" style="fill:var(--kh2fm);fill-opacity:0.6"/><path d="M-34.24 -16.49 L-81.09 -39.05 A90 90 0 0 1 -70.36 -56.11 L-29.71 -23.69 A38 38 0 0 0 -34.24 -16.49Z" style="fill:var(--aqua);fill-opacity:0.8"/><path d="M-29.71 -23.69 L-70.36 -56.11 A90 90 0 0 1 -56.11 -70.36 L-23.69 -29.71 A38 38 0 0 0 -29.71 -23.69Z" style="fill:var(--ventus);fill-opacity:0.95"/><path d="M-23.69 -29.71 L-56.11 -70.36 A90 90 0 0 1 -39.05 -81.09 L-16.49 -34.24 A38 38 0 0 0 -23.69 -29.71Z" style="fill:var(--terra);fill-opacity:0.6"/><path d="M-16.49 -34.24 L-39.05 -81.09 A90 90 0 0 1 -20.03 -87.74 L-8.46 -37.05 A38 38 0 0 0 -16.49 -34.24Z" style="fill:var(--ddd);fill-opacity:0.8"/><path d="M-8.46 -37.05 L-20.03 -87.74 A90 90 0 0 1 -0.00 -90.00 L-0.00 -38.00 A38 38 0 0 0 -8.46 -37.05Z" style="fill:var(--kh3);fill-opacity:0.95"/></g><circle r="90" class="v-ring"/><circle cx="0.00" cy="-64.00" r="13" class="v-medal"/><circle cx="55.43" cy="-32.00" r="13" class="v-medal"/><circle cx="55.43" cy="32.00" r="13" class="v-medal"/><circle cx="0.00" cy="64.00" r="13" class="v-medal"/><circle cx="-55.43" cy="32.00" r="13" class="v-medal"/><circle cx="-55.43" cy="-32.00" r="13" class="v-medal"/><circle r="38" fill="url(#vc2)" class="v-core"/><path class="v-crown" d="M-16 9 -13 -9 -5 -1 0 -14 5 -1 13 -9 16 9Z"/><rect class="v-crown" x="-16" y="11" width="32" height="4" rx="2"/></svg></div></div>
+        <ul class="colecciones" aria-label="Colecciones de Steam que cubre la guía">
+          <li class="col reveal" data-tilt style="--k:0">
+            <span class="logo3d" style="--img:url('img/logos/remix.png')">
+              <img src="img/logos/remix.png" alt="Kingdom Hearts HD 1.5+2.5 ReMIX" width="699" height="491" decoding="async">
+              <span class="logo3d-luz" aria-hidden="true"></span>
+            </span>
+            <span class="col-meta"><b>197</b> logros · 4 juegos</span>
+          </li>
+          <li class="col reveal" data-tilt style="--k:1">
+            <span class="logo3d" style="--img:url('img/logos/fcp.webp')">
+              <img src="img/logos/fcp.webp" alt="Kingdom Hearts HD 2.8 Final Chapter Prologue" width="889" height="607" decoding="async">
+              <span class="logo3d-luz" aria-hidden="true"></span>
+            </span>
+            <span class="col-meta"><b>69</b> logros · 2 juegos</span>
+          </li>
+          <li class="col reveal" data-tilt style="--k:2">
+            <span class="logo3d" style="--img:url('img/logos/kh3-remind.webp')">
+              <img src="img/logos/kh3-remind.webp" alt="Kingdom Hearts III + Re Mind" width="720" height="460" decoding="async">
+              <span class="logo3d-luz" aria-hidden="true"></span>
+            </span>
+            <span class="col-meta"><b>51</b> logros · 1 juego</span>
+          </li>
+        </ul>
       </div>
-    </article>
+
+      <div class="cifras">
+        <p class="cifra reveal" style="--k:0"><b data-cuenta="317">317</b> logros de Steam</p>
+        <p class="cifra reveal" style="--k:1"><b data-cuenta="7">7</b> juegos en 3 colecciones</p>
+        <p class="cifra reveal" style="--k:2"><b data-cuenta="6">6</b> con guía; Re:Chain of Memories, en preparación</p>
+      </div>
+    </section>
+
+    <!-- Qué cubre la guía en cada juego -->
+    <section class="juegos" aria-labelledby="t-juegos">
+      <h2 class="juegos-titulo reveal" id="t-juegos">Qué tiene cada juego</h2>
+      <ul class="juegos-lista">
+        <li class="juego reveal" data-tilt style="--k:0;--tile:var(--kh)">
+          <span class="logo3d" style="--img:url('img/logos/khfm.png')"><img src="img/logos/khfm.png" alt="" width="704" height="478" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Kingdom Hearts Final Mix</h3>
+            <p>Cerraduras de cada mundo, diario de Pepito con los 99 dálmatas, armas y síntesis, naves gumi, Coliseo y jefes.</p>
+          </div>
+        </li>
+        <li class="juego reveal" data-tilt style="--k:1;--tile:var(--kh2fm)">
+          <span class="logo3d" style="--img:url('img/logos/kh2fm.png')"><img src="img/logos/kh2fm.png" alt="" width="708" height="480" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Kingdom Hearts II Final Mix</h3>
+            <p>Mundos, diario, tesoros, orfebrería, formas de Sora, armas, minijuegos, Coliseo y jefes.</p>
+          </div>
+        </li>
+        <li class="juego reveal" data-tilt style="--k:2;--tile:var(--ventus)">
+          <span class="logo3d" style="--img:url('img/logos/bbsfm.png')"><img src="img/logos/bbsfm.png" alt="" width="652" height="478" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Birth by Sleep Final Mix</h3>
+            <p>Terra, Ventus y Aqua por separado: builds, comandos y síntesis, tableros, Coso Virtual, tesoros y jefes.</p>
+          </div>
+        </li>
+        <li class="juego juego-off reveal" style="--k:3;--tile:var(--text-2)">
+          <span class="logo3d" style="--img:url('img/logos/recom.png')"><img src="img/logos/recom.png" alt="" width="738" height="488" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Re:Chain of Memories</h3>
+            <p class="pronto">En preparación</p>
+          </div>
+        </li>
+        <li class="juego reveal" data-tilt style="--k:4;--tile:var(--ddd)">
+          <span class="logo3d" style="--img:url('img/logos/ddd.webp')"><img src="img/logos/ddd.webp" alt="" width="708" height="480" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Dream Drop Distance</h3>
+            <p>Historia, portales secretos, lucientes, minijuegos y Realidad Onírica.</p>
+          </div>
+        </li>
+        <li class="juego reveal" data-tilt style="--k:5;--tile:var(--aqua)">
+          <span class="logo3d" style="--img:url('img/logos/bbs02.webp')"><img src="img/logos/bbs02.webp" alt="" width="900" height="568" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>0.2 Birth by Sleep</h3>
+            <p>Historia y jefes de Aqua, los 51 objetivos, cofres y magia.</p>
+          </div>
+        </li>
+        <li class="juego reveal" data-tilt style="--k:6;--tile:var(--kh3)">
+          <span class="logo3d" style="--img:url('img/logos/kh3.webp')"><img src="img/logos/kh3.webp" alt="" width="720" height="438" loading="lazy" decoding="async"><span class="logo3d-luz" aria-hidden="true"></span></span>
+          <div class="juego-cuerpo">
+            <h3>Kingdom Hearts III + Re Mind</h3>
+            <p>Arma Artema, portafortunas, tesoros, orfebrería, cocina, minijuegos, nave gumi, Re Mind y jefes.</p>
+          </div>
+        </li>
+      </ul>
+
+      <p class="cierre reveal">
+        <a class="btn btn-oro btn-xl" href="https://alvaroportillo.github.io/kh-guia-100/">
+          Abrir la guía
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </p>
+    </section>
   </main>
 
   <footer class="foot">
-    <p>Proyectos personales y sin ánimo de lucro. Kingdom Hearts pertenece a Square Enix y Disney; World of Warcraft, a Blizzard Entertainment; Project Zomboid, a The Indie Stone.</p>
+    <p class="foot-name" aria-hidden="true">Alvaro Portillo</p>
+    <p class="foot-legal">Proyecto personal y sin ánimo de lucro. Kingdom Hearts y los logos de sus juegos pertenecen a Square Enix y Disney. El emblema mezcla elementos de Kingdom Hearts, World of Warcraft (Blizzard Entertainment) y Naruto (Masashi Kishimoto).</p>
   </footer>
-
-  <script>
-    // Botón de tema: oscuro por defecto, el claro se recuerda en este navegador.
-    const boton = document.querySelector('[data-theme-toggle]');
-    const pinta = () => {
-      const claro = document.documentElement.dataset.theme === 'light';
-      boton.setAttribute('aria-label', claro ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro');
-    };
-    boton.addEventListener('click', () => {
-      const t = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.dataset.theme = t;
-      try { localStorage.setItem('portada:tema', t); } catch {}
-      pinta();
-    });
-    pinta();
-  </script>
 </body>
 </html>

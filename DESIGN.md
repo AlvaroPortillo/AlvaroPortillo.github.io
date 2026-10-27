@@ -1,24 +1,19 @@
-# DESIGN.md · Portada de proyectos de Alvaro Portillo
+# DESIGN.md · Portada de Alvaro Portillo
 
-Página principal (`https://alvaroportillo.github.io/`) que enlaza las webs de juegos que voy haciendo.
-Hereda el sistema de la Guía 100 % de Kingdom Hearts (`kh-guia-100/DESIGN.md`) para que todo se
-sienta de la misma casa, pero sin los logos de la guía.
+Página principal (`https://alvaroportillo.github.io/`). Solo enlaza a dos sitios: la Guía 100 % de
+Kingdom Hearts y mi GitHub. Hereda el sistema de la guía (`kh-guia-100/DESIGN.md`) y sus efectos de
+portada (`#/juegos`) para que todo se sienta de la misma casa.
 
 ## Idea central
-El **emblema Kingdom Hearts + World of Warcraft + Naruto** es el elemento memorable (`notas/logo.py`
-genera `img/logo.svg`, `img/logo-animado.svg` y el de la cabecera). De atrás adelante:
-- Cruzadas detrás del anillo, con punta y guarda asomando: Frostmourne, la espada de Arthas (hoja
-  dentada con runas que laten en la canaladura, calavera de ojos azules con cuernos, pomo con pinchos)
-  y la Cadena Reino de KH (dientes en corona, guarda dorada en cesta, llavero con la cabeza de Mickey).
-- Puntas biseladas, anillo de metal dorado con remaches y cimera con gema roja (WoW).
-- Banda de piedra con runas arcanas que laten (la piedra de hogar). Glifos inventados.
-- Vidriera de la Estación del Despertar (KH) con el azul de la Alianza y el rojo de la Horda.
-- Sharingan (Naruto) con tres tomoe; la pupila es el corazón con la corona de KH.
+Una portada de Kingdom Hearts a pantalla completa: la **vidriera** de la Estación del Despertar gigante
+detrás del **emblema** personal, bajo una aurora con los colores de los juegos y chispas de luz que suben.
+Debajo, la guía: las tres colecciones de Steam como puertas sobre otra vidriera, las cifras y lo que tiene
+cada juego.
 
-Animado: la banda gira a un lado (90 s), la vidriera al otro (140 s), las runas laten y los tomoe del
-sharingan giran (9 s). Con `prefers-reduced-motion` se queda quieto. Los colores del emblema son fijos (es un logo),
-no cambian con el tema. Todo lo demás es sobrio: texto alineado a la izquierda, mucho aire y una fila
-ancha por proyecto con su captura.
+El emblema KH + WoW + Naruto (`notas/logo.py` genera `img/logo.svg`, `img/logo-animado.svg` y el de
+`index.html`, entre `<!-- logo:inicio -->` y `<!-- logo:fin -->`): Frostmourne y la Cadena Reino cruzadas,
+anillo dorado con remaches y gema roja, banda de runas, vidriera con azul de la Alianza y rojo de la
+Horda y sharingan con el corazón de KH en la pupila. Sus colores son fijos (es un logo).
 
 ## Paleta (tokens en `:root`)
 | Token | Oscuro (por defecto) | Claro | Uso |
@@ -28,34 +23,32 @@ ancha por proyecto con su captura.
 | `--line` | `rgba(170,195,255,.18)` | `rgba(20,32,80,.14)` | Bordes sutiles |
 | `--text` | `#ECF0FF` | `#0F1633` | Texto principal |
 | `--text-2` | `#AEB9DA` | `#3D4770` | Texto secundario (AA sobre `--bg`) |
-| `--gold` | `#EBC765` | `#9A6B00` | Nombre, foco de teclado |
-| `--kh` | `#6FA8FF` | `#1F55B8` | Acento de la guía de Kingdom Hearts (azul de `--khfm`) |
-| `--pz` | `#FFB547` | `#8A4D00` | Acento de Project Zomboid (ámbar `--sodium` de su panel) |
+| `--gold` | `#EBC765` | `#9A6B00` | Nombre, botón principal, cifras, foco |
+| `--kh`, `--kh2fm`, `--kh3`, `--ddd`, `--aqua`, `--ventus`, `--terra` | los de la guía | los de la guía | Aurora, vidrieras, chispas y el tinte de cada ficha de juego (`--tile`) |
 
-Cada proyecto define `--accent` con su color. Máximo dos acentos visibles a la vez
-(`--accent` + `--gold`). Los botones llevan texto `--on-accent` (oscuro en tema oscuro, blanco en claro).
+El dorado es el único acento de interfaz; los colores de los juegos solo tiñen fondos y fichas.
 
 ## Tipografía
-- **Cinzel** 900 para el nombre, en oro grabado con bandas de metal y un leve brillo arcano (rótulos de
-  WoW). En tema claro, oro oscuro sin brillo para mantener el contraste.
-- **Cinzel** 700: el nombre de cada proyecto.
+- **Cinzel** 900: el nombre, en oro grabado (en claro, oro oscuro sin brillo), y las cifras.
+- **Cinzel** 700: títulos de sección y nombres de juego.
 - **Sora** (400/600/800): todo lo demás.
-- Escala 1.25 (igual que la guía). Cuerpo 1rem/1.6. Líneas ≤ 62 caracteres.
 
 ## Espaciado y radios
-- Escala de 4 px: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 72 · 112. Margen lateral de 16 px en móvil.
-- Radios: `--r-s: 10px` (chips) · `--r-m: 18px` (capturas) · `--r-l: 28px` (marco del proyecto).
+- Escala de 4 px. Margen lateral de 16 px; ancho máximo 1180 px.
+- Radios: `--r-s: 10px` · `--r-m: 18px` · `--r-l: 28px` (fichas y cifras). Botones en píldora.
 
 ## Movimiento
-- Un único momento orquestado: el emblema animado y el texto de cabecera que sube al cargar.
-- Al pasar sobre un proyecto, su marco toma el color del proyecto (200 ms, `cubic-bezier(.2,.7,.2,1)`).
-- `prefers-reduced-motion`: sin giro ni transiciones.
+Todo con `transform`/`opacity` y desactivado con `prefers-reduced-motion` (y sin JS, todo se ve quieto y completo):
+- Portada: la aurora deriva (26 s), la vidriera se enciende y gira (160 s, y avanza con el scroll),
+  chispas en `<canvas>` (se paran si la portada no se ve), el emblema entra girando, flota y se inclina
+  hacia el ratón, y un destello recorre el nombre cada 7 s.
+- Colecciones y fichas: logos con relieve que se inclinan hacia el ratón y un destello que los recorre
+  (`.logo3d`, igual que la guía); en las fichas, una luz del color del juego sigue al ratón.
+- Cada bloque sube al entrar en pantalla, escalonado (`--k`); las cifras cuentan desde cero.
+- Cursor: estela de llave espada (`cursor.js`, solo con ratón).
+- Botones: brillo que los cruza y la flecha avanza (200 ms).
 
 ## Reglas
-- Contraste WCAG AA, foco visible (anillo dorado), funciona a 390 px y 1280 px.
+- Contraste WCAG AA, foco visible (anillo dorado), funciona a 390 px y 1280 px sin scroll lateral.
 - Nada de emojis como iconos: SVG en línea.
-- Tema oscuro por defecto; el botón de tema cambia a claro y se recuerda en el navegador.
-
-## Añadir un proyecto
-1. Captura a 1440 × 900 (tema oscuro), convertida a WebP de 1200 × 750 en `img/<repo>.webp`.
-2. Copiar un `<article class="project">` en `index.html` y darle su `--accent` en `styles.css`.
+- Tema oscuro por defecto; el botón de tema cambia a claro y se recuerda en el navegador (`portada:tema`).
